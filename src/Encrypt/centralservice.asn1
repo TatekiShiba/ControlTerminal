@@ -1,0 +1,52 @@
+--*********************************************************************************
+--
+-- サービスCTRL端末内で暗号化されるデータ
+-- ASN1 Playground : https://asn1.io/asn1playground/
+--
+--*********************************************************************************
+CryptographyDataModule DEFINITIONS ::=
+BEGIN
+
+	EXPORTS
+        CryptographyData;
+
+    --IMPORTS
+    --    BeaconID FROM DSRCData;
+
+    -- 
+    -- 路側機固有番号
+    --
+    CTRLNumber ::=SEQUENCE{  -- 3byte
+	    serialNumber	INTEGER(0.. 65535), 
+        port 		INTEGER(0..7),
+		reserve		BIT STRING(SIZE(5))
+	}
+
+	BeaconID ::=SEQUENCE{
+	    manufacturerid INTEGER(0..65535),
+	    individualid INTEGER(0..134217727)
+	}
+
+    BeaconIDp ::=SEQUENCE{
+		padding     BIT STRING(SIZE(1)),
+        beaconT75  BeaconID  -- ARIB STD T75参照
+    }
+
+    --
+    -- 暗号化対象データフォーマット 暗号化後は384byteとなる。
+    --
+    SourceData ::= SEQUENCE{              -- 暗号化対象データ
+        c          CTRLNumber, 
+        beaconID	   BeaconIDp,              
+        aslID      OCTET STRING(SIZE(12)), -- 12byte 車利用型ガイドライン参照
+        crc        BIT STRING(SIZE(16))  -- ARIB STD T75 生成多項式：x^16 + x^12 + x^5 + 11＋Ｘ５＋Ｘ１２＋Ｘ１６
+    }
+
+    --
+    -- 暗号化データ
+    --
+    CryptographyData ::= SEQUENCE{
+         cryptographyData	OCTET STRING --SourceDataを暗号化したデータをセットする。
+    }
+
+END -- of CryptographyDataModule

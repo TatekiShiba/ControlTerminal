@@ -1,0 +1,101 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Remote Launch - Self-contained",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Armadillo debug",
+            "program": "~/Encrypt/Encrypt",
+            "args": [
+                "1-1"
+            ],
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            },
+            "cwd": "~/Encrypt",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}\\src\\Encrypt",
+                "pipeProgram": "C:\\Program Files\\PuTTY\\PLINK.EXE",
+                "pipeArgs": [
+                    "-P",
+                    "3843",
+                    "-pw",
+                    "trion1admin",
+                    "root@192.168.101.1"
+                ],
+                "debuggerPath": "~/vsdbg/vsdbg"
+            }
+        },
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/ApiServer/bin/Debug/net6.0/ApiServer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ApiServer",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/src/ApiServer/Views"
+            }
+        },
+        {
+            "name": "Encrypt",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Encrypt/bin/Debug/net6.0/Encrypt.dll",
+            "args": [
+                "1-1"
+            ],
+            "cwd": "${workspaceFolder}/src/Encrypt",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Decrypt",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Decrypt/bin/Debug/net6.0/Decrypt.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Decrypt",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/RsaOaep/bin/Debug/net6.0/RsaOaep.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/RsaOaep",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}

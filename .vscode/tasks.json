@@ -1,0 +1,89 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ControlTerminal.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/RsaOaep/RsaOaep.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/RsaOaep/RsaOaep.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "remote-publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-r",
+                "linux-arm",
+                "${workspaceFolder}/src/Encrypt/Encrypt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "scp",
+            "type": "shell",
+            "command": "c:\\Program Files\\PuTTY\\pscp.exe",
+            "args": [
+                "-P",
+                "3843",
+                "-pw",
+                "trion1admin",
+                "-r",
+                "${workspaceFolder}/src/Encrypt/bin/Debug/net6.0/linux-arm/publish/*",
+                "root@192.168.101.1:/root/Encrypt"
+            ],
+        },
+        {
+            "label": "Armadillo debug",
+            "type": "shell",
+            "command": "C:\\Program Files\\PuTTY\\PLINK.EXE",
+            "args": [
+                "-ssh",
+                "root@192.168.101.1",
+                "-P",
+                "3843",
+                "-pw",
+                "trion1admin",
+                "-batch",
+                "chmod 755 ~/Encrypt/Encrypt"
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "remote-publish",
+                "scp"
+            ]
+        }
+    ]
+}
