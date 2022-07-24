@@ -43,7 +43,8 @@ public class InquiryAndRecordController : ControllerBase
                 Reserve = requestData!.CtrlTerminalNumber.Reserve,
             },
             SessionNumber = (byte)requestData.SessionNumber,
-        });
+            OKNG = false
+    });
     }
 }
 

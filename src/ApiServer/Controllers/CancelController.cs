@@ -16,6 +16,23 @@ public class CancelController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return new JsonResult(new CancelResponse
+        {
+            BusinessNumber = 1,
+            CtrlTerminalNumber = new CtrlTerminalNumber
+            {
+                SerialNumber = 1,
+                Port = 1,
+                Reserve = 0,
+            },
+            SessionNumber = 1,
+            OKNG = true
+        });
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post()
     {

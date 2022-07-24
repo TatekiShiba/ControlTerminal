@@ -93,6 +93,22 @@
             "stopAtEntry": false
         },
         {
+            "name": "FakeFurunoWcn",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/FakeFurunoWcn/bin/Debug/net6.0/FakeFurunoWcn.dll",
+            "args": [
+                "1-1"
+            ],
+            "cwd": "${workspaceFolder}/src/FakeFurunoWcn",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
