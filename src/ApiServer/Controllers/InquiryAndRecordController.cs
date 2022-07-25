@@ -33,6 +33,19 @@ public class InquiryAndRecordController : ControllerBase
         }
         var requestData = JsonSerializer.Deserialize<InquiryAndRecordRequest>(contentText);
 
+        foreach (var h in Request.Headers.Keys)
+        {
+            _logger.LogInformation($"Header: {h},{Request.Headers[h]}");
+        }
+        _logger.LogInformation($"BusinessNumber:{requestData?.BusinessNumber}");
+        _logger.LogInformation($"CtrlTerminalNumber.SerialNumber:{requestData?.CtrlTerminalNumber.SerialNumber}");
+        _logger.LogInformation($"CtrlTerminalNumber.Port:{requestData?.CtrlTerminalNumber.Port}");
+        _logger.LogInformation($"Command:{requestData?.Command}");
+        _logger.LogInformation($"SessionNumber:{requestData?.SessionNumber}");
+        _logger.LogInformation($"SessionNumberDatetime:{requestData?.SessionNumberDatetime}");
+        _logger.LogInformation($"SessionNumberDatetime:{requestData?.TargetDatetime}");
+        _logger.LogInformation($"ToPCKKOutPutData:{requestData?.ToPCKKOutPutData}");
+
         return new JsonResult(new InquiryAndRecordResponse
         {
             BusinessNumber = requestData!.BusinessNumber,
