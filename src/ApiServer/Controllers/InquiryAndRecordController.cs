@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using ApiServer.Entities;
@@ -56,8 +57,8 @@ public class InquiryAndRecordController : ControllerBase
                 Reserve = requestData!.CtrlTerminalNumber.Reserve,
             },
             SessionNumber = (byte)requestData.SessionNumber,
-            OKNG = false
-    });
+            OKNG = true,
+        });
     }
 }
 
